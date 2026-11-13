@@ -1,0 +1,446 @@
+/* ==========================================================================
+   BorinqueTec · Demo Day — Hoja de estilos
+   --------------------------------------------------------------------------
+   Paleta y tipografía tomadas de la presentación oficial.
+   Convención de nombres: BEM  (bloque__elemento--modificador)
+
+   ÍNDICE
+    1. Variables (paleta, fuentes, medidas)
+    2. Reinicio y base
+    3. Utilidades (contenedor, accesibilidad, texto)
+    4. Navegación
+    5. Botones
+    6. Decoración circular
+    7. Portada (hero)
+    8. Secciones y encabezados
+    9. Tarjetas y listas
+   10. Layouts (split, grid)
+   11. Servicios
+   12. Mercadeo
+   13. Financiamiento (tabla)
+   14. Finanzas (pestañas, indicadores, gráfica)
+   15. Preguntas
+   16. Cierre
+   17. Pie de página
+   18. Responsive (≤ 900px)
+   19. Preferencias del usuario (movimiento reducido)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. VARIABLES
+   Cambiar un color aquí lo cambia en todo el sitio.
+   ========================================================================== */
+:root {
+  /* Colores de marca */
+  --cream:      #FFF8EC;   /* fondo principal */
+  --cream-alt:  #FFFDF8;   /* fondo alterno de secciones */
+  --teal:       #063B4C;   /* títulos y bloques oscuros */
+  --ink:        #20313A;   /* texto principal */
+  --ink-soft:   #23343B;   /* texto secundario */
+  --muted:      #5E6B70;   /* notas y subtítulos */
+  --red:        #D9342B;   /* acento: rojo */
+  --gold:       #D9A441;   /* acento: dorado */
+  --green:      #5B9E2F;   /* acento: verde */
+  --blue:       #1769AA;   /* acento: azul */
+  --green-dark: #1D6A2E;   /* indicadores positivos */
+  --red-dark:   #A52828;   /* indicadores / barras de costo */
+  --white:      #FFFFFF;
+
+  /* Tipografía */
+  --font-title: "Outfit", "Segoe UI", Arial, sans-serif;
+  --font-body:  "Nunito Sans", "Segoe UI", Arial, sans-serif;
+
+  /* Medidas y efectos */
+  --radius: 28px;
+  --shadow: 0 8px 24px rgba(6, 59, 76, .14);
+  --max:    1120px;          /* ancho máximo del contenido */
+  --nav-h:  72px;            /* alto aproximado de la barra fija */
+}
+
+
+/* ==========================================================================
+   2. REINICIO Y BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);   /* evita que la barra tape los títulos */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+img   { display: block; max-width: 100%; height: auto; }
+ul    { margin: 0; padding: 0; }
+p     { margin: 0 0 .9em; }
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+  color: var(--teal);
+  line-height: 1.15;
+  margin: 0 0 .5em;
+}
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 700; }
+h3 { font-size: 1.4rem; font-weight: 700; }
+
+/* Foco visible para quien navega con teclado */
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+
+/* ==========================================================================
+   3. UTILIDADES
+   ========================================================================== */
+.container { width: min(var(--max), 100% - 2.5rem); margin-inline: auto; }
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Enlace "Saltar al contenido": aparece al recibir foco */
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--gold); color: var(--teal);
+  padding: .6rem 1rem; border-radius: 8px; font-weight: 800;
+}
+.skip-link:focus { top: 1rem; }
+
+.muted { color: var(--muted); font-size: .95rem; }
+
+/* Etiqueta pequeña sobre cada título de sección */
+.eyebrow {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: .6rem;
+}
+.eyebrow--gold { color: var(--gold); }
+
+
+/* ==========================================================================
+   4. NAVEGACIÓN
+   Barra fija superior. En móvil los enlaces se pliegan (.is-open los muestra).
+   ========================================================================== */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .6rem 1.25rem;
+  background: var(--teal);
+  color: var(--white);
+}
+
+.nav__brand {
+  display: flex; align-items: center; gap: .6rem;
+  color: var(--white); text-decoration: none;
+  font-family: var(--font-title); font-weight: 700; font-size: 1.2rem;
+}
+.nav__brand img { border-radius: 50%; background: var(--white); }
+
+.nav__links { display: flex; gap: 1.1rem; }
+.nav__links a {
+  color: var(--cream); text-decoration: none;
+  font-weight: 700; font-size: .92rem;
+  padding: .3rem 0; border-bottom: 2px solid transparent;
+  transition: border-color .2s, color .2s;
+}
+.nav__links a:hover,
+.nav__links a.is-active { color: var(--gold); border-color: var(--gold); }  /* .is-active lo pone main.js */
+
+.nav__toggle {
+  display: none;                       /* se muestra en el breakpoint móvil */
+  background: none; border: 0; cursor: pointer;
+  color: var(--white); font-size: 1.6rem;
+}
+
+
+/* ==========================================================================
+   5. BOTONES
+   ========================================================================== */
+.btn {
+  display: inline-block; margin-top: .5rem;
+  background: var(--red); color: var(--white);
+  font-family: var(--font-title); font-weight: 700;
+  padding: .85rem 1.8rem; border-radius: 999px; text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform .2s, background .2s;
+}
+.btn:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+
+/* ==========================================================================
+   6. DECORACIÓN CIRCULAR
+   Círculos de la presentación. Posicionados de forma absoluta dentro de
+   secciones con position: relative y overflow: hidden.
+   ========================================================================== */
+.deco { position: absolute; border-radius: 50%; pointer-events: none; }
+.deco--blue  { background: var(--blue);  width: 520px; height: 520px; top: -160px;   right: -120px; }
+.deco--green { background: var(--green); width: 420px; height: 420px; bottom: -190px; right: -90px; }
+.deco--red   { background: var(--red);   width: 44px;  height: 44px;  top: 70px;      right: 38%; }
+.deco--gold  { background: var(--gold);  width: 60px;  height: 60px;  bottom: 60px;   right: 30%; }
+
+
+/* ==========================================================================
+   7. PORTADA (HERO)
+   ========================================================================== */
+.hero { position: relative; overflow: hidden; padding: 5rem 0 6rem; background: var(--cream); }
+
+.hero__grid {
+  position: relative;                                  /* queda sobre los círculos */
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: 2rem; align-items: center;
+}
+.hero h1       { font-size: clamp(3rem, 8vw, 5.2rem); font-weight: 800; margin-bottom: .1em; }
+.hero__tag     { font-family: var(--font-title); font-weight: 700; color: var(--red); letter-spacing: .08em; font-size: 1.25rem; }
+.hero__lead    { font-size: 1.2rem; max-width: 34em; margin: 1.5rem 0 1rem; }
+.hero__meta    { color: var(--muted); font-size: .9rem; }
+.hero__logo img {
+  width: min(380px, 80%); margin-inline: auto;
+  background: var(--white); border-radius: 24px; box-shadow: var(--shadow);
+}
+
+
+/* ==========================================================================
+   8. SECCIONES Y ENCABEZADOS
+   ========================================================================== */
+.section       { padding: 4.5rem 0; background: var(--cream); }
+.section--alt  { background: var(--cream-alt); }       /* alterna el fondo entre secciones */
+.section__head { margin-bottom: 1.5rem; }
+.section__head h2 { max-width: 20em; margin-bottom: .2em; }
+
+.lead-blue { font-family: var(--font-title); font-weight: 500; font-size: 1.5rem; color: var(--blue); line-height: 1.35; }
+.tagline   { text-align: center; margin-top: 2rem; font-family: var(--font-title); font-weight: 700; font-size: 1.4rem; color: var(--teal); }
+
+
+/* ==========================================================================
+   9. TARJETAS Y LISTAS
+   ========================================================================== */
+.card         { border-radius: var(--radius); padding: 2rem 2.2rem; box-shadow: var(--shadow); }
+.card--cream  { background: var(--cream); }
+.card--white  { background: var(--white); }
+.card--teal   { background: var(--teal); color: var(--cream); }
+.card--teal h3 { color: var(--white); }
+
+.list { list-style: none; }
+.list li { position: relative; padding-left: 1.5rem; margin-bottom: .6rem; }
+.list li::before {                                     /* viñeta circular roja */
+  content: ""; position: absolute; left: 0; top: .65em;
+  width: .55rem; height: .55rem; border-radius: 50%; background: var(--red);
+}
+.list--check li::before {                              /* variante con ✓ verde */
+  content: "✓"; background: none; color: var(--green-dark);
+  font-weight: 800; width: auto; height: auto; top: 0;
+}
+.card--teal .list li::before { background: var(--gold); }
+
+
+/* ==========================================================================
+   10. LAYOUTS
+   .split = texto + imagen   |   .grid = cuadrícula de tarjetas
+   ========================================================================== */
+.split {
+  display: grid; grid-template-columns: 1.4fr .8fr;
+  gap: 2rem; align-items: end; margin-top: 1.5rem;
+}
+.split--reverse { grid-template-columns: .8fr 1.4fr; align-items: center; }
+.split--wide    { grid-template-columns: 1.5fr .6fr; }
+.split--table   { grid-template-columns: 1fr 1fr; align-items: start; }
+
+.person {                                              /* fotos recortadas de personas */
+  max-height: 440px; width: auto; margin-inline: auto;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .12));
+}
+
+.grid         { display: grid; gap: 1.5rem; }
+.grid--2      { grid-template-columns: 1fr 1fr; gap: 1.2rem; align-self: center; }
+.grid--3      { grid-template-columns: repeat(3, 1fr); margin-top: 2.5rem; }
+
+
+/* ==========================================================================
+   11. SERVICIOS
+   Cada tarjeta recibe un color con su modificador (--blue, --gold, --red).
+   ========================================================================== */
+.service { position: relative; padding-top: 2.6rem; border-top: 6px solid var(--blue); }
+.service--gold { border-top-color: var(--gold); }
+.service--red  { border-top-color: var(--red); }
+.service h3    { font-size: 1.3rem; }
+
+.badge {                                               /* círculo numerado 01/02/03 */
+  position: absolute; top: -1.4rem; left: 1.6rem;
+  width: 2.8rem; height: 2.8rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--blue); color: var(--white);
+  font-family: var(--font-title); font-weight: 700; box-shadow: var(--shadow);
+}
+.service--gold .badge { background: var(--gold); }
+.service--red  .badge { background: var(--red); }
+
+
+/* ==========================================================================
+   12. MERCADEO
+   ========================================================================== */
+.channel h3 { font-size: 1.25rem; }
+.channel--blue  h3 { color: var(--blue); }
+.channel--red   h3 { color: var(--red); }
+.channel--green h3 { color: var(--green); }
+.channel--gold  h3 { color: var(--gold); }
+.channel p      { margin-bottom: .4em; }
+.channel small  { color: var(--ink-soft); font-weight: 700; }
+
+.goal {                                                /* recuadro "Objetivo del primer año" */
+  margin: 2rem 0 0; padding: 1.1rem 1.5rem;
+  background: #FCEFD3; 
+  border: 2px solid var(--gold); 
+  border-radius: 18px;
+  text-align: center
+}
+.goal strong { font-family: var(--font-title); color: var(--teal); }
+
+
+/* ==========================================================================
+   13. FINANCIAMIENTO (tabla de fuentes y usos)
+   ========================================================================== */
+.table-wrap { overflow-x: auto; background: var(--white); border-radius: 18px; box-shadow: var(--shadow); }
+
+.funds { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.funds thead th {                                      /* títulos "Fuentes" y "Uso" */
+  background: #C5D8A0; color: var(--green-dark);
+  text-align: left; font-family: var(--font-title); padding: .6rem 1rem;
+}
+.funds tbody th, .funds tfoot th { text-align: left; font-weight: 700; padding: .55rem 1rem; }
+.funds td { text-align: right; padding: .55rem 1rem; font-variant-numeric: tabular-nums; }
+.funds tbody tr { border-bottom: 1px solid #E8E2D4; }
+.funds__total th, .funds__total td { font-weight: 800; border-top: 3px double var(--ink); }
+.funds tfoot th, .funds tfoot td {
+  color: var(--green-dark); font-family: var(--font-title); font-weight: 700;
+  font-size: 1.1rem; border-top: 2px solid var(--green-dark);
+}
+
+.card--teal .amount { font-family: var(--font-title); font-weight: 700; font-size: 1.4rem; color: var(--gold); }
+
+
+/* ==========================================================================
+   14. FINANZAS
+   Pestañas por año, indicadores (kpi) y gráfica de barras con CSS puro.
+   La altura de cada barra llega desde main.js en la variable --h.
+   ========================================================================== */
+.tabs { display: flex; gap: .6rem; margin: 1rem 0 1.5rem; }
+.tabs__btn {
+  font-family: var(--font-title); font-weight: 700; font-size: 1rem;
+  padding: .6rem 1.4rem; border-radius: 999px; cursor: pointer;
+  background: var(--white); color: var(--teal); border: 2px solid var(--teal);
+  transition: background .2s, color .2s;
+}
+.tabs__btn:hover { background: #FCEFD3; }
+.tabs__btn.is-active { background: var(--teal); color: var(--white); }
+
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.2rem 0 2rem; }
+.kpi  { text-align: center; padding: 1rem; border-radius: 14px; border: 2px solid var(--green-dark); background: #DFF0D8; color: var(--green-dark); }
+.kpi span   { display: block; font-size: .8rem; font-weight: 700; color: #5C5C5C; }
+.kpi strong { font-family: var(--font-title); font-size: 1.8rem; }
+.kpi--red   { background: #F6DADA; border-color: var(--red-dark); color: #7B1C1C; }
+
+.chart__title { font-family: var(--font-title); font-weight: 700; color: var(--teal); margin-bottom: 1.4rem; }
+.chart        { display: grid; grid-template-columns: 150px 1fr 150px; gap: 1rem; align-items: end; }
+.chart__person{ max-height: 260px; width: auto; margin-inline: auto; }
+.chart__note  { margin-top: .8rem; }
+
+.chart__bars  { display: flex; align-items: flex-end; gap: .5rem; height: 300px; padding-top: 1.5rem; border-bottom: 3px solid var(--teal); }
+.bar {
+  position: relative; flex: 1; height: var(--h);       /* --h = % calculado por main.js */
+  border-radius: 8px 8px 0 0; background: var(--red-dark);
+  display: flex; align-items: flex-end; justify-content: center;
+  transition: height .5s ease;                         /* animación al cambiar de año */
+}
+.bar--green { background: var(--green-dark); }         /* meses de crecimiento (7-12) */
+.bar span   { color: var(--white); font-weight: 700; font-size: .85rem; padding-bottom: .4rem; }
+.bar em     { position: absolute; top: -1.4rem; font-style: normal; font-size: .72rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+
+/* ==========================================================================
+   15. PREGUNTAS
+   ========================================================================== */
+.questions { background: var(--teal); color: var(--white); padding: 4rem 0 0; overflow: hidden; }
+.questions__grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 2rem; }
+.questions h2 { color: var(--white); font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 800; padding-bottom: 3rem; }
+.questions img { max-height: 420px; width: auto; margin-inline: auto; }
+
+
+/* ==========================================================================
+   16. CIERRE
+   ========================================================================== */
+.closing { position: relative; overflow: hidden; background: var(--cream); padding: 4rem 0 0; }
+.closing .deco--blue  { top: -200px;    right: -160px; }
+.closing .deco--green { bottom: -220px; right: -120px; }
+.closing__grid { position: relative; display: grid; grid-template-columns: .8fr 1.2fr; align-items: end; gap: 2rem; }
+.closing__grid > div { padding-bottom: 4rem; }
+.closing img { max-height: 520px; width: auto; margin-inline: auto; }
+.closing__thanks { font-family: var(--font-title); font-weight: 800; font-size: clamp(3rem, 8vw, 5rem); color: var(--teal); line-height: 1; margin: 1.2rem 0; }
+.closing__thanks span { display: block; font-size: .5em; font-weight: 600; color: var(--red); margin-top: .3rem; }
+.closing blockquote {
+  margin: 0; padding: 1.2rem 1.6rem; background: var(--white);
+  border-left: 6px solid var(--red); border-radius: 0 18px 18px 0;
+  font-family: var(--font-title); font-weight: 600; font-size: 1.25rem;
+  color: var(--teal); box-shadow: var(--shadow);
+}
+
+
+/* ==========================================================================
+   17. PIE DE PÁGINA
+   ========================================================================== */
+.footer { display: flex; align-items: center; justify-content: center; gap: .7rem; padding: 1rem; background: var(--gold); color: var(--teal); font-weight: 800; }
+.footer img { border-radius: 50%; background: var(--white); }
+
+
+/* ==========================================================================
+   18. RESPONSIVE (tablet y móvil)
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* Menú plegable */
+  .nav__toggle { display: block; }
+  .nav__links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: var(--teal); padding: .5rem 1.25rem 1rem;
+  }
+  .nav__links.is-open { display: flex; }               /* lo activa main.js */
+  .nav__links a { padding: .7rem 0; }
+
+  /* Todo en una columna */
+  .hero__grid, .split, .split--reverse, .split--wide, .split--table,
+  .grid--2, .grid--3, .questions__grid, .closing__grid { grid-template-columns: 1fr; }
+
+  .hero { padding: 3rem 0 4rem; }
+  .deco--red, .deco--gold { display: none; }
+  .person { max-height: 320px; }
+  .grid--3 { gap: 2.2rem; }
+
+  .kpis { grid-template-columns: 1fr 1fr; }
+  .chart { grid-template-columns: 1fr; }
+  .chart__person { display: none; }
+  .chart__bars { gap: .25rem; }
+  .bar em { display: none; }
+
+  .questions h2 { padding-bottom: 1rem; }
+  .closing__grid > div { padding-bottom: 1rem; order: -1; }
+}
+
+
+/* ==========================================================================
+   19. PREFERENCIAS DEL USUARIO
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

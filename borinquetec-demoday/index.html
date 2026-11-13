@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  BorinqueTec · Demo Day
+  Página web de presentación del emprendimiento.
+
+  ESTRUCTURA DEL DOCUMENTO
+    1. <header>  Navegación fija
+    2. <main>
+         #inicio         Portada (hero)
+         #propuesta      Propuesta de valor
+         #servicios      Nuestros servicios
+         #diferenciacion Diferenciación
+         #mercadeo       Plan de mercadeo
+         #financiamiento Fondos de financiamiento
+         #finanzas       Proyecciones financieras (Años 1-3)
+         #preguntas      Sección de preguntas
+         #cierre         Cierre
+    3. <footer>  Pie de página
+
+  ARCHIVOS RELACIONADOS
+    styles.css      Estilos (ver índice dentro del archivo)
+    main.js        Menú móvil, enlace activo y gráfica interactiva
+    img/            Logo y fotografías optimizadas
+  ============================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BorinqueTec | Conectando generaciones · Demo Day</title>
+  <meta name="description" content="BorinqueTec: emprendimiento social de integración tecnológica con acompañamiento digital cercano para personas mayores en Puerto Rico.">
+
+  <!-- Tipografías: Outfit (títulos) y Nunito Sans (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Enlace de accesibilidad: permite saltar la navegación con el teclado -->
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== 1. NAVEGACIÓN ===================== -->
+  <header class="nav">
+    <a class="nav__brand" href="#inicio" aria-label="BorinqueTec, ir al inicio">
+      <img src="img/logo.png" alt="" width="44" height="44">
+      <span>BorinqueTec</span>
+    </a>
+
+    <!-- Botón de menú (solo visible en pantallas pequeñas; lo controla main.js) -->
+    <button class="nav__toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">☰</button>
+
+    <nav class="nav__links" id="menu" aria-label="Principal">
+      <a href="#propuesta">Propuesta</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#diferenciacion">Diferenciación</a>
+      <a href="#mercadeo">Mercadeo</a>
+      <a href="#financiamiento">Financiamiento</a>
+      <a href="#finanzas">Finanzas</a>
+    </nav>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===================== PORTADA ===================== -->
+    <section class="hero" id="inicio">
+      <!-- Círculos decorativos (ver .deco en CSS) -->
+      <span class="deco deco--blue" aria-hidden="true"></span>
+      <span class="deco deco--green" aria-hidden="true"></span>
+      <span class="deco deco--red" aria-hidden="true"></span>
+      <span class="deco deco--gold" aria-hidden="true"></span>
+
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <h1>BorinqueTec</h1>
+          <p class="hero__tag">CONECTANDO GENERACIONES</p>
+          <p class="hero__lead">
+            Emprendimiento social de integración tecnológica.<br>
+            Acompañamiento digital cercano, práctico y al ritmo de nuestra gente de oro.
+          </p>
+          <p class="hero__meta">Melanie Ramos Vázquez</p>
+          <p class="hero__meta">Presentación Final EMP 413C · Sección 06 · Prof. José Fuentes</p>
+          <p class="hero__meta">Universidad de Sagrado Corazón · Diciembre 2026</p>
+          <a class="btn" href="https://lanyx4.github.io/BorinqueTec/">Conoce más</a>
+        </div>
+        <div class="hero__logo">
+          <img src="img/logo.png" alt="Logo de BorinqueTec: coquí con sombrero y bandera de Puerto Rico">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROPUESTA DE VALOR ===================== -->
+    <section class="section" id="propuesta">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Propuesta de valor</p>
+          <h2>BorinqueTec: Tecnología a tu ritmo</h2>
+          <p class="muted">Quiénes somos</p>
+        </header>
+
+        <div class="split split--reverse">
+          <p class="lead-blue">Nos enfocamos en reducir la brecha digital y fortalecer las destrezas tecnológicas de las personas mayores.</p>
+
+          <div class="card card--white">
+            <ul class="list list--check">
+              <li><b>Enfoque humano y seguro:</b> Creamos un entorno libre de presiones donde se erradica por completo el miedo común a desconfigurar o «dañar» los equipos electrónicos.</li>
+              <li><b>Fomento de independencia:</b> Capacitamos al participante para que recupere el control autónomo de sus gestiones bancarias, médicas y de entretenimiento en la red.</li>
+              <li><b>Inclusión integral:</b> Atendemos un nicho desatendido en el mercado puertorriqueño (segmento de 50 a 75 años), brindándoles herramientas competitivas para la era moderna.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICIOS ===================== -->
+    <section class="section section--alt" id="servicios">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Nuestros servicios</p>
+          <h2>La tecnología se aprende en compañía</h2>
+        </header>
+
+        <!-- Tres tarjetas; el color del borde y de la insignia lo define el modificador (--blue, --gold, --red) -->
+        <div class="grid grid--3">
+          <article class="card card--white service service--blue">
+            <span class="badge" aria-hidden="true">01</span>
+            <h3>Tutorías personalizadas</h3>
+            <p>Orientación individual según las necesidades y el ritmo de cada participante.</p>
+          </article>
+          <article class="card card--white service service--gold">
+            <span class="badge" aria-hidden="true">02</span>
+            <h3>Programas de acompañamiento</h3>
+            <p>Apoyo cercano para ganar confianza al utilizar herramientas digitales.</p>
+          </article>
+          <article class="card card--white service service--red">
+            <span class="badge" aria-hidden="true">03</span>
+            <h3>Talleres prácticos</h3>
+            <p>Actividades para practicar habilidades tecnológicas en un entorno accesible.</p>
+          </article>
+        </div>
+        <p class="tagline">Aprende a cualquier edad</p>
+      </div>
+    </section>
+
+    <!-- ===================== DIFERENCIACIÓN ===================== -->
+    <section class="section" id="diferenciacion">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Diferenciación</p>
+          <h2>BorinqueTec: Tecnología a tu ritmo</h2>
+        </header>
+
+        <div class="split">
+          <div class="card card--white">
+            <p><b>Nos diferenciamos:</b> Enseñanza paciente, práctica y adaptada al ritmo de cada persona. Un acompañamiento cercano y un entorno sin presión.</p>
+            <p><b>Mayor debilidad:</b> Como negocio nuevo, necesitamos darnos a conocer y construir confianza en la comunidad.</p>
+            <p><b>Fortaleza:</b> Ofrecer servicios especializados que promuevan autonomía e inclusión digital.</p>
+          </div>
+          <img class="person" src="img/adulta-pensando.png" alt="Mujer mayor sosteniendo un letrero" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MERCADEO ===================== -->
+    <section class="section section--alt" id="mercadeo">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Mercadeo</p>
+          <h2>Plan de mercadeo</h2>
+        </header>
+
+        <div class="split split--wide">
+          <div class="grid grid--2">
+            <article class="card card--white channel channel--blue">
+              <h3>Facebook</h3>
+              <p>✓ Anuncios, eventos, ofertas y testimonios.</p>
+              <small>2-3 publicaciones por semana</small>
+            </article>
+            <article class="card card--white channel channel--red">
+              <h3>Instagram</h3>
+              <p>✓ Promociones, actividades y experiencias de clientes.</p>
+              <small>2-3 publicaciones por semana</small>
+            </article>
+            <article class="card card--white channel channel--green">
+              <h3>WhatsApp Business</h3>
+              <p>✓ Consultas, citas, recordatorios e información.</p>
+              <small>Comunicación directa con los clientes.</small>
+            </article>
+            <article class="card card--white channel channel--gold">
+              <h3>Comunidad</h3>
+              <p>✓ Alianzas con centros de envejecientes, municipios y planes médicos.</p>
+              <small>Actividades periódicas.</small>
+            </article>
+          </div>
+          <img class="person" src="img/adulta-ofreciendo.png" alt="Mujer mayor extendiendo la mano" loading="lazy">
+        </div>
+
+        <p class="goal"><strong>Objetivo del primer año:</strong> Dar a conocer BorinqueTec y atraer clientes potenciales interesados en nuestros servicios.</p>
+      </div>
+    </section>
+
+    <!-- ===================== FINANCIAMIENTO ===================== -->
+    <section class="section" id="financiamiento">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Propuesta de financiamiento</p>
+          <h2>Fondos de financiamiento</h2>
+        </header>
+
+        <div class="split split--table">
+          <!-- Tabla de fuentes y usos de fondos -->
+          <div class="table-wrap">
+            <table class="funds">
+              <caption class="sr-only">Fuentes y usos de fondos</caption>
+              <thead><tr><th scope="col" colspan="2">Fuentes de fondos</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Préstamos</th><td>$240,000</td></tr>
+                <tr><th scope="row">Aportación propia</th><td>$5,000</td></tr>
+                <tr class="funds__total"><th scope="row">Total</th><td>$245,000</td></tr>
+              </tbody>
+              <thead><tr><th scope="col" colspan="2">Uso de fondos</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Gastos</th><td>$5,250</td></tr>
+                <tr><th scope="row">Activos</th><td>$231,600</td></tr>
+                <tr class="funds__total"><th scope="row">Total</th><td>$236,850</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><th scope="row">Balance de fondos de inicio</th><td>$8,150</td></tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <aside class="card card--teal">
+            <h3>Petición de fondos</h3>
+            <p>Cantidad de fondos solicitada:</p>
+            <p class="amount">Nuevo emprendedor: $240,000</p>
+            <p>Los fondos se utilizarán para establecer y poner en funcionamiento BorinqueTec, cubriendo los gastos principales de inicio:</p>
+            <ul class="list">
+              <li>Edificio, equipos, mobiliario, software, permisos y trámites legales.</li>
+              <li><b>Capacitación:</b> preparación del personal.</li>
+              <li><b>Capital operacional:</b> servicios, materiales educativos y gastos iniciales.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FINANZAS (Años 1 a 3) ===================== -->
+    <section class="section section--alt" id="finanzas">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Finanzas</p>
+          <h2>Proyecciones financieras</h2>
+        </header>
+
+        <!-- Selector de año: main.js escucha estos botones y repinta indicadores y gráfica -->
+        <div class="tabs" role="tablist" aria-label="Seleccionar año de proyección">
+          <button class="tabs__btn is-active" role="tab" aria-selected="true"  data-year="1" id="tab-1" aria-controls="panel-finanzas">Año 1</button>
+          <button class="tabs__btn"           role="tab" aria-selected="false" data-year="2" id="tab-2" aria-controls="panel-finanzas" tabindex="-1">Año 2</button>
+          <button class="tabs__btn"           role="tab" aria-selected="false" data-year="3" id="tab-3" aria-controls="panel-finanzas" tabindex="-1">Año 3</button>
+        </div>
+
+        <div id="panel-finanzas" role="tabpanel" aria-labelledby="tab-1">
+          <p class="muted" id="supuestos"></p>
+
+          <!-- Indicadores (los valores los inserta main.js desde el objeto DATA) -->
+          <div class="kpis">
+            <div class="kpi kpi--green"><span>Ingresos</span><strong id="kpi-ing">—</strong></div>
+            <div class="kpi kpi--red"><span>Costos</span><strong id="kpi-cos">—</strong></div>
+            <div class="kpi kpi--green"><span>Utilidad neta</span><strong id="kpi-uti">—</strong></div>
+            <div class="kpi kpi--green"><span>Margen</span><strong id="kpi-mar">—</strong></div>
+          </div>
+
+          <p class="chart__title">Ingresos mensuales proyectados</p>
+          <div class="chart">
+            <img class="chart__person" src="img/adulta-desaprobando.png" alt="Mujer mayor con pulgar arriba" loading="lazy">
+            <!-- Las barras se generan en main.js -->
+            <div class="chart__bars" id="bars" role="img" aria-label="Gráfica de ingresos mensuales del año seleccionado"></div>
+            <img class="chart__person" src="img/adulta-aprobando.png" alt="Mujer mayor con pulgar abajo" loading="lazy">
+          </div>
+          <p class="muted chart__note">Las barras de los tres años usan la misma escala para poder compararlas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PREGUNTAS ===================== -->
+    <section class="questions" id="preguntas">
+      <div class="container questions__grid">
+        <div>
+          <p class="eyebrow eyebrow--gold">Sección de preguntas</p>
+          <h2>Dudas o preguntas</h2>
+        </div>
+        <img src="img/adulta-dudas.png" alt="Mujer mayor con gesto de duda" loading="lazy">
+      </div>
+    </section>
+
+    <!-- ===================== CIERRE ===================== -->
+    <section class="closing" id="cierre">
+      <span class="deco deco--blue" aria-hidden="true"></span>
+      <span class="deco deco--green" aria-hidden="true"></span>
+      <div class="container closing__grid">
+        <img src="img/adulta-celular.png" alt="Mujer mayor sosteniendo un teléfono" loading="lazy">
+        <div>
+          <p class="eyebrow eyebrow--gold">Cierre</p>
+          <h2>El futuro de la integración digital</h2>
+          <p class="closing__thanks">Gracias<span>por su tiempo</span></p>
+          <blockquote>«La tecnología nos conecta. El acompañamiento de BorinqueTec hace la diferencia.»</blockquote>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="footer">
+    <img src="img/logo.png" alt="" width="36" height="36">
+    <span>BorinqueTec • Conectando generaciones</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
